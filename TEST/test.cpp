@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -7,8 +8,9 @@ typedef void (*p1)(int* a);
 p1 ptr1 = f1;
 
 int main() {
-    int a = 3;
-    ptr1(&a);
+    char str[] = "Hello";
+    cout << strlen(str) << endl;;
+    cout << sizeof(str) << endl;;
 }
 
 void f1(int* a) {
