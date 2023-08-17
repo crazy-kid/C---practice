@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/randwalk.dir/vect.cpp.o CMakeFiles/randwalk.dir/randwalk.cpp.o -o "/home/rick/Documents/C++ practice/C++ primer plus/Chapter 11/2/bin/randwalk" 
