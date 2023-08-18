@@ -3,16 +3,21 @@
 
 using namespace std;
 
-void f1(int* a);
-typedef void (*p1)(int* a);
-p1 ptr1 = f1;
+int& f1(int& a);
+const int& f2(int& a);
 
 int main() {
-    char str[] = "Hello";
-    cout << strlen(str) << endl;;
-    cout << sizeof(str) << endl;;
+    int num1 = 1, num2 = 2;
+    f1(num1) = 5;//可以通过编译，语句执行后num==5。
+    f2(num2) = 9;//无法通过编译，f2(num2)无法作为左值。
 }
 
-void f1(int* a) {
-    cout << *a << endl;
+int& f1(int& a) {
+    a++;
+    return a;
+}
+
+const int& f2(int& a) {
+    a++;
+    return a;
 }
