@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <string.h>
 
 using namespace std;
 
@@ -12,6 +13,8 @@ int main() {
     f1(num1) = 5;//可以通过编译，语句执行后num==5。
     cout << num1 << endl;
     // f2(num2) = 9;//无法通过编译，f2(num2)无法作为左值。
+    char* str = "abcdefg";
+    cout << strlen(str);
 }
 
 int& f1(int& a) {

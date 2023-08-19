@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/main.dir/main.cpp.o CMakeFiles/main.dir/string1.cpp.o -o "/home/rick/Documents/C++ practice/C++ primer plus/Chapter 12/2/bin/main" 
