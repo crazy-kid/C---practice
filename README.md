@@ -98,7 +98,7 @@
    2. **复制构造函数**：以下情况将调用
       - `TypeName newObject = TypeName(object)`
       - `TypeName newObject = object`
-      - 函数按值返回对象
+      - 函数按值传入或返回对象
    3. **默认析构函数**
    4. **赋值运算符**：（处理`object1 = object2`，需要实现深度复制）
    5. **地址运算符**：（通常不用特别处理）

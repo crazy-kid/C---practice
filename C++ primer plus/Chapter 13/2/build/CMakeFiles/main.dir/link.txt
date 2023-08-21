@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/main.dir/main.cpp.o CMakeFiles/main.dir/cd.cpp.o CMakeFiles/main.dir/classic.cpp.o -o "/home/rick/Documents/C++ practice/C++ primer plus/Chapter 13/2/bin/main" 
