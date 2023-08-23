@@ -10,6 +10,7 @@ const int& f2(int& a);
 int main(int argc, char const* argv[])
 {
     /* code */
+    cout << "Hello World" << endl;
     return 0;
 }
 
