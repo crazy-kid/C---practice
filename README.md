@@ -32,7 +32,7 @@
 
     **Example**
 
-    ```C++
+        ```cpp
     int& f1(int& a);
     const int& f2(int& a);
 
@@ -140,7 +140,7 @@
 
     **Example**
 
-    ```C++
+    ```cpp
     void fr(Brass& rb); // uses rb.ViewAcct()
     void fp(Brass* pb); // uses pb->ViewAcct()
     void fv(Brass  b);  // uses b.ViewAcct()
@@ -217,3 +217,4 @@ VScode使用`.vscode`中的`lunch.json`文件配置运行信息
 
 1. 对于交叉编译的文件，有时需要使用`file ${file}`来加载符号
 2. Linux下程序崩溃时会在指定目录下生成`.core`文件，其中包含内存映像和调试信息，gdb可以调试`.core`文件，如果没有生成`.core`文件，可能是`ulimit`设置不对
+
