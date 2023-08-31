@@ -1,6 +1,7 @@
 # C++-practice
 
 - [C++-practice](#c-practice)
+  - [数组](#数组)
   - [函数](#函数)
     - [参数传递与返回](#参数传递与返回)
     - [重载](#重载)
@@ -21,6 +22,42 @@
     - [运行配置](#运行配置)
       - [常用条目](#常用条目)
     - [GDB调试](#gdb调试)
+    - [valgrind](#valgrind)
+
+## 数组
+
+1. 数组名作为实参被传入函数时在函数内部只是相应的指针
+
+   **example**
+
+   ```cpp
+   int main(int argc, char const* argv[])
+   {
+      char arr[5];
+      strcpy(arr, "helloWorld");
+      cout << "strlen: " << strlen(arr) << endl; // 10 结果只和内存中的值有关与数组无关
+      cout << "sizeof: " << sizeof(arr) << endl; // 5 sizeof是预编译指令，作用在数组名上得到整个数组占内存的字节数
+      fun_char(arr);
+
+      int arr2[] = { 1,2,3,4,5 };
+      cout << "sizeof: " << sizeof(arr2) << endl; // 20 每个int占4字节，数组大小为5，4 * 5 = 20
+      fun_int(arr2);
+      return 0;
+   }
+
+   void fun_char(char arr[]) // 看起来arr是个数组，其实是个指针
+   {
+      cout << "arr type: " << typeid(arr).name() << endl; // Pc: 指向char的指针
+      cout << "strlen: " << strlen(arr) << endl; // 10 理由同上
+      cout << "sizeof: " << sizeof(arr) << endl; // 8 函数内的arr不是数组名，只是指针。sizeof 最后返回的是一个内存地址占的字节数，64位系统是8个字节
+   }
+
+   void fun_int(int arr[])
+   {
+      cout << "arr type: " << typeid(arr).name() << endl; // Pi: 指向int的指针
+      cout << "sizeof: " << sizeof(arr) << endl; // 8 理由同上
+   }
+   ```
 
 ## 函数
 
@@ -30,9 +67,9 @@
 2. 非引用的函数返回值只能作为**右值**，但返回引用的函数可以作为**左值**，要避免这种特性需要在返回值前加上`const`
 3. `const`量是无法作为实参传递给非`const`引用形参的但是反过来是可以的:非`const`量可以作为实参传递给`const`引用
 
-    **Example**
+    **example**
 
-        ```cpp
+   ```cpp
     int& f1(int& a);
     const int& f2(int& a);
 
@@ -52,8 +89,8 @@
     const int& f2(int& a) {
         a++;
         return a;
-    }    
-    ```
+    }
+   ```
 
 ### 重载
 
@@ -138,7 +175,7 @@
 5. 编译器对虚方法使用动态联编
 6. 按值传递会导致派生类的对象只把基类的部分传递给虚函数，下面的例子中`BrassPlus`是`Brass`的公有派生类，`ViewAcct()`是虚函数
 
-    **Example**
+    **example**
 
     ```cpp
     void fr(Brass& rb); // uses rb.ViewAcct()
@@ -218,3 +255,6 @@ VScode使用`.vscode`中的`lunch.json`文件配置运行信息
 1. 对于交叉编译的文件，有时需要使用`file ${file}`来加载符号
 2. Linux下程序崩溃时会在指定目录下生成`.core`文件，其中包含内存映像和调试信息，gdb可以调试`.core`文件，如果没有生成`.core`文件，可能是`ulimit`设置不对
 
+### valgrind
+
+仿真调试工具集合
