@@ -211,47 +211,54 @@
 
 7. 编译器处理虚函数的方法:给每个对象添加一个隐藏成员。隐藏成员中保存了一个指向函数地址数组的指针。这种数组称为**虚函数表**。虚函数表中存储了为类对象进行声明的虚函数地址
 8. 使用虚函数时，对于每一个类，编译器都创建一个虚函数地址表（数组），每一个对象都创建一个指针
-9. 任何类只要自身有成员函数是虚函数或者其基类中有虚函数，该类的对象里就有指向虚函表的指针
-    **example**
+9. `virtual`在函数名和参数列表相同的情况下可以被派生类继承：派生类中的函数就算没有`virtual`修饰，只要基类中有相同函数名、参数列表的`virtual`函数，派生类中的函数也视为被`virtual`修饰
+10. 任何类只要自身有成员函数是虚函数（被隐藏的`virtual`函数也包括），该类的对象里就有指向虚函表的指针
 
-    ```cpp
-   class Base
-   {
-      long x;
-   public:
-      virtual void show() { cout << "x = " << x << endl; }
-   };
+      **example**
 
-   class A : public Base
-   {
-      long y;
-   public:
-      virtual void show() { cout << "y = " << y << endl; }
-   };
+      ```cpp
+      class Base
+      {
+         long x;
+      public:
+         virtual void show() { cout << "x = " << x << endl; }
+      };
 
-   class B {
-      int z;
-      char c;
-   public:
-      void show() { cout << "y = " << z << endl; }
-   };
+      class A : public Base
+      {
+         long y;
+      public:
+         virtual void show() { cout << "y = " << y << endl; }
+      };
 
-   int main(int argc, char const* argv[])
-   {
-      // sizeof 需要考虑内存对齐
-      // 16 8(x) + 8(Vptr)
-      cout << "sizeof(Base) = " << sizeof(Base) << endl;
-      // 24 8(Base::x) + 8(y) + 8(Vptr)
-      cout << "sizeof(A) = " << sizeof(A) << endl;
-      // 8 4(z) + 1(c) + 3(内存对齐)
-      // B没有虚方法，也没有基类，如果将B::shwo()声明为virtual则会变为16
-      cout << "sizeof(B) = " << sizeof(B) << endl;
-      return 0;
-   }
-    ```
+      class B {
+         int z;
+         char c;
+      public:
+         void show() { cout << "y = " << z << endl; }
+      };
 
-10. 同样名称的虚函数，在基类中定义的虚函数与派生类中定义的虚函数，在虚函数表中的偏移量都是一致的，只有这样才能保证动态绑定
-11. 构造函数不能是虚函数；析构函数应该是虚函数，除非类不用做基类；友元不能是虚函数，因为友元不是类成员
+      int main(int argc, char const* argv[])
+      {
+         // sizeof 需要考虑内存对齐
+         // 16 8(x) + 8(Vptr)
+         cout << "sizeof(Base) = " << sizeof(Base) << endl;
+         // 24 8(Base::x) + 8(y) + 8(Vptr)
+         cout << "sizeof(A) = " << sizeof(A) << endl;
+         // 8 4(z) + 1(c) + 3(内存对齐)
+         // B没有虚方法，也没有基类，如果将B::shwo()声明为virtual则会变为16
+         cout << "sizeof(B) = " << sizeof(B) << endl;
+         return 0;
+      }
+      ```
+
+11. 同样名称的虚函数，在基类中定义的虚函数与派生类中定义的虚函数，在虚函数表中的偏移量都是一致的，只有这样才能保证动态绑定
+12. 构造函数不能是虚函数；析构函数应该是虚函数，除非类不用做基类；友元不能是虚函数，因为友元不是类成员
+13. **函数重写（覆盖）** 必须满足如下条件
+    - 函数名、参数列表、返回值都必须与基类中被重写的函数一致
+    - 基类中被重写的函数必须有`virtual`修饰
+14. **函数隐藏** 指派生类的函数屏蔽了有相同函数名的函数（无论参数列表是否相同都会屏蔽）
+15. 隐藏发生在编译时，重写发生在运行时
 
 ## 编程习惯
 
