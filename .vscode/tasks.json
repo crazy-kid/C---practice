@@ -10,7 +10,8 @@
                 // "${file}",
                 "*.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-std=c++23"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -34,7 +35,8 @@
                 // "${file}",
                 "*.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-std=c++23"
             ],
             "options": {
                 "cwd": "${fileDirname}"
